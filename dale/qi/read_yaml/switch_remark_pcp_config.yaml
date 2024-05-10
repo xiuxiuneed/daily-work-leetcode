@@ -1,0 +1,115 @@
+# NVOS-44702
+# config of testing switch remarking pcap 
+
+acl:
+  aclTable:
+  -
+    name: acl entry 1
+    rule:
+      action: drop
+      input_port: 11
+      vlan_id: 10
+      source_mac: 08-26-a4-3b-56-f8
+      destionation_mac: 00-24-9f-6f-32-e5
+      source_ip: 172.20.10.254/24
+      destination_ip: 172.20.10.1/24
+      protocol: udp
+      source_port: 10001
+      destination__port: 10001
+  -
+    name: acl entry 2
+    rule:
+      action: remark
+      input_port: 11
+      vlan_id: 11
+      source_mac: 08-26-ae-3b-56-f9
+      destionation_mac: 00-24-9f-6f-32-e5
+      source_ip: 172.20.11.254/24
+      destination_ip: 172.20.11.1/24
+      protocol: tcp
+      source_port: 10001
+      destination__port: 10001
+      remark_pcp: 7
+  -
+    name: acl entry 3
+    rule:
+      action: remark
+      input_port: 11
+      vlan_id: 11
+      source_mac: 08-26-a4-3b-56-f8
+      destionation_mac: 00-24-9b-6f-32-ea
+      source_ip: 172.20.11.254/24
+      destination_ip: 172.20.11.1/24
+      protocol: udp
+      source_port: 9999
+      destination__port: 9999
+      remark_pcp: 6
+  -
+    name: acl entry 4
+    rule:
+      action: remark
+      input_port: 11
+      vlan_id: 10
+      source_mac: 08-26-ae-3b-56-f9
+      destionation_mac: 00-24-9b-6f-32-ea
+      source_ip: 172.20.10.254/24
+      destination_ip: 172.20.10.1/24
+      protocol: tcp
+      source_port: 9999
+      destination__port: 9999
+      remark_pcp: 5
+  -
+    name: acl entry 5
+    rule:
+      action: remark
+      input_port: 11
+      vlan_id: 11
+      source_mac: 08-26-a4-3b-56-f8
+      destionation_mac: 00-24-9b-6f-32-ea
+      source_ip: 172.20.11.254/24
+      destination_ip: 172.20.11.1/24
+      protocol: tcp
+      source_port: 9999
+      destination__port: 9999
+      remark_pcp: 7 
+  -
+    name: acl entry 6
+    rule:
+      action: remark
+      input_port: 11
+      vlan_id: 10
+      source_mac: 08-26-ae-3b-56-f9
+      destionation_mac: 00-24-9f-6f-32-e5
+      source_ip: 172.20.10.254/24
+      destination_ip: 172.20.10.1/24
+      protocol: udp
+      source_port: 10001
+      destination__port: 10001
+      remark_pcp: 6
+  -
+    name: acl entry 7
+    rule:
+      action: remark
+      input_port: 11
+      vlan_id: 11
+      source_mac: 08-26-a4-3b-56-f8
+      destionation_mac: 00-24-9b-6f-32-ea
+      source_ip: 172.20.11.254/24
+      destination_ip: 172.20.11.1/24
+      protocol: udp
+      source_port: 10001
+      destination__port: 10001
+      remark_pcp: 5 
+  -
+    name: acl entry 8
+    rule:
+      action: permit
+      input_port: 11
+      vlan_id: 10
+      source_mac: 08-26-a4-3b-56-f8
+      destionation_mac: 00-24-9f-6f-32-e5
+      source_ip: 172.20.10.254/24
+      destination_ip: 172.20.10.1/24
+      protocol: tcp
+      source_port: 10001
+      destination__port: 10001
