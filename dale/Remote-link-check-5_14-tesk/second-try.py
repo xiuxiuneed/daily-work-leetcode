@@ -1,4 +1,5 @@
 import paramiko
+import time
 def ssh_connect(hostname, port, username, password):
     try:
         client = paramiko.SSHClient()
@@ -12,27 +13,27 @@ def ssh_connect(hostname, port, username, password):
     except paramiko.Exception as e:
         print("错误:", str(e))
 
-hostname = '10.160.254.23'
+
 port = 22
+hostname = '10.110.192.196'
 username = 'nio'
 password = 'NIO3200#'
 
 ssh_client = ssh_connect(hostname, port, username, password)
 if ssh_client:
     print("SSH已经建立")
-    command = [
-        "ssh nio@10.160.251.68",
-        "NIO3200#"
-        # "ps",  # 列出当前目录中的文件和文件夹
-        # "pwd",  # 显示当前工作目录的路径
-        # "whoami",  # 显示当前用户
-        # "df -h",
-        # "nmap - p "
-    ]
-    for command in command:
-        stdin, stdout, stderr = ssh_client.exec_command(command)
-        print(f"执行命令{command}")
-        print(stdout.read().decode())
+    chan = ssh_client.invoke_shell()
+    chan.send('telnet 172.20.10.1\n')
+    time.sleep(5)
+    output = ''
+    while not chan.exit_status_ready():
+        if chan.recv_ready():
+            output += chan.recv(1024).decode('utf-8')
+    chan.send('ls -hlR\n')
+    time.sleep(5)
+
+    chan.send('^]\n')
+    chan.send('exit\n')
 
     ssh_client.close()
     print("SSH 连接已关闭")
